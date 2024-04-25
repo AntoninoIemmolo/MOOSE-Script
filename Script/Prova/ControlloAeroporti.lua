@@ -1,6 +1,6 @@
 --Assume that a max number of 7 airport can be checked simultaneously.
 --
-DebugFlag=true
+DebugFlag=false
 MaxBuff=7
 local UsedBuff=0
 
