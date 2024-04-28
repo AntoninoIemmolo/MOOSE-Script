@@ -17,6 +17,7 @@ function FunzKutInvasion(zone,group)
 end
 
 local function MyMisson()
+    ciao = AIRBASE:FindByName()
     MESSAGE:New("Script Start"):ToAll()
     --local ciao=STORAGE.Liquid
     --[[local KutaisiStorage=STORAGE:FindByName("kutaisi")
@@ -27,8 +28,6 @@ local function MyMisson()
     --messaggio first parameter is the string of the message 
     --the second parameter is the message dutarion
     ]]
-
-
     local KutaisiAirbase = AIRBASE:FindByName("Kutaisi")
     --function done to check if kutaisi airbase object is been found
     if KutaisiAirbase ~= nil then
@@ -57,8 +56,8 @@ local function MyMisson()
     end
 
 end
+    MyMisson()
 
-MyMisson()
 -----------------------------------------------------------------
 
 --[[

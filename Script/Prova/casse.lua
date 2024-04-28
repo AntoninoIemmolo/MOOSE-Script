@@ -1,23 +1,27 @@
---Versione (0.0.1)
-
-
----@type GROUP
-local heliGroup=GROUP:FindByName("Rotary-1")
-if heliGroup==nil then MESSAGE:New("heli group not found"):ToAll() end
-
+--Versione (0.0.1a)
 ---@type SET_CARGO
-local CargoSet=SET_CARGO:New()
-SET_UNIT:Flush
-if CargoSet==nil then MESSAGE:New("cargo set not found"):ToAll() end
+--from now on every cargo abject which will be declared if the type match with "crate" it will be 
+--added to CargoSet
+local CargoSet = SET_CARGO:New()
+CargoSet:Filter("crate")
+CargoSet:FilterStart()
 
----@type CARGO 
-local Cargo1=CARGO:New("Container","Cargo 1-2",1000)
+---@type CARGO_CRATE
+local CargoCrate = CARGO_CRATE:New(STATIC:FindByName("Cargo 1-1"), "crate", "CargoCrate")
+local CargoCrate1 = CARGO_CRATE:New(STATIC:FindByName("Cargo 1-2"), "crate", "CargoCrate1")
+CargoSet:FilterStop()
 
+---@type ZONE
+local PickupZone=ZONE:FindByName("Pickup Zone")
+if PickupZone == nil then MESSAGE:New("Pickup Zone not found"):ToAll() end
+
+---@type ZONE
+local DeployZone=ZONE:FindByName("Deploy Zone")
+if DeployZone == nil then MESSAGE:New("Deploy Zone not found"):ToAll() end
 
 ---@type AI_CARGO_HELICOPTER
-local heli=AI_CARGO_HELICOPTER:New(heliGroup,Cargo1)
+local CargoHeliGroup=AI_CARGO_HELICOPTER:New(GROUP:FindByName("Rotary-1"),CargoSet)
+CargoHeliGroup:Pickup(PickupZone:GetRandomCoordinate(),80)
+CargoHeliGroup:Deploy(DeployZone:GetRandomCoordinate(),190)
 
-MESSAGE:New("OK"):ToAll()
-heli:Pickup(AIRBASE:FindByName("Kobuleti"):GetZone(),80)
 
-AI_CARGO_HELICOPTER
